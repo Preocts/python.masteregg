@@ -1,14 +1,17 @@
 ### Mastermind - Code Challenge
 
-- Python 3.8
+**Requirements**
+- Python 3.8.1
+- [colorama](https://pypi.org/project/colorama/) v0.4.3
 
 ---
 
 #### Code Requirements:
 
-- Create a code of *n* pegs in a range of 4 to 20
 - Compute hints based on the rules below
-- Indicate when the input is invalid
+- Validate input
+- Draw a game board
+- Use color to indicate code pieces
 - Indicate when the game has been won
 
 ---
