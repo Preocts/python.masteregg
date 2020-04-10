@@ -1,0 +1,49 @@
+What we need to interact with:
+
+    mainBoard: This holds all the pieces that have been played
+        - Pieces copied up from playerBoard
+        - Hintpegs added after call to game engine
+
+    statusBoard: This updates the player on what is happening
+        roundCounter: How many rounds played / left
+
+    playerBoard: Where the player makes guesses
+
+
+    victoryBoard: Displays on a victory
+
+    lossBoard: Displays on a loss
+        displaySecert: Shows the secret code
+
+
+    A game, in Python, is:
+        gameID: UUID for the game
+            x secretCode: A secret code
+            x maxRounds: A max number rounds
+            x curRound: Current round
+            x gameState: 0, in play - 1, victory - 2, loss
+            x playerMoves: A set of all player moves
+            x cpuHints: A matched set of all hints
+            x gameID: Which game are we referencing?
+
+    When a player submits a guess:
+        Javascript:
+            x decode div classes into code list
+            x POST to /checkMove payload is:
+                playerGuess: [0, 1, 1, 1]
+                gameID: str
+        Python:
+            x Send the player's guess list to the game engine
+            x Check the guess
+            x Record guess and hints
+            x increment rounds
+            x Check for win/loss
+            x return gameData
+        Javascript:
+            x Create a new row
+            x Clear playerBoard
+            x If win/lose
+                x Hide playerBoard
+                x Show victory/lossBoard
+            x Else
+                x Update roundCounter

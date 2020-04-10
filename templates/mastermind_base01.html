@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+    body {
+        background-color: #111;
+        color: #EEE;
+        font-family: Source Code Pro, consolas, serif;
+        width: 800px;
+        height: 600px;
+        margin: 0px;
+        padding: 25px;
+    }
+
+    .boardHeader {
+        width: 90%;
+        text-align: center;
+        font-size: 48px;
+        padding: 10px;
+    }
+
+    .boardByLine {
+        width: 90%;
+        padding: 10px;
+        text-align: center;
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .gameBoard {
+        display: grid;
+        grid-template-columns: auto auto auto auto auto;
+        grid-gap: 5px;
+        width: 90%;
+        padding: 5px;
+        margin-bottom: 10px;
+        background-color: #CCC;
+    }
+
+    .boardPiece {
+        text-align: center;
+        vertical-align: center;
+        font-size: 30px;
+        background-color: #666;
+    }
+
+    .inputField {
+        text-align: center;
+        vertical-align: center;
+        padding: 0px;
+        margin: 0px;
+        background-color: #666;
+    }
+
+    .inputBox {
+        width: 100%;
+        font-size: 30px;
+        background-color: #666;
+        text-align: center;
+        color: #FFF;
+    }
+
+    .submitButton {
+        width: 90%;
+        padding: 10px;
+        text-align: center;
+        background-color: #333;
+        font-size: 30px;
+    }
+
+    .submitButton:hover {
+        background-color: #CCC;
+        color: #333;
+    }
+
+    .blankBox {
+        background-color: #111;
+        text-align: center;
+        font-size: 30px;
+        width: 100%;
+    }
+
+    .color0 { background-color: #F00; color: #000; }
+    .color1 { background-color: #0F0; color: #000; }
+    .color2 { background-color: #FF0; color: #000; }
+    .color3 { background-color: #F0F; color: #000; }
+    .color4 { background-color: #00F; color: #EEE; }
+    .color5 { background-color: #000; color: #EEE; }
+
+</style>
+<script type="text/javascript">
+    var colorList = ["#FF0000", "#00FF00", "#FFFF00", "#FF00FF", "#0000FF", "#000000"]
+    var fontColorList = ["#000000", "#000000", "#000000", "#000000", "#EEEEEE", "#EEEEEE"]
+
+    function colorUpdate(myElement) {
+        var div = myElement.parentElement;
+        if (myElement.value == "") {
+            div.style.backgroundColor = "#CCC";
+            myElement.style.backgroundColor = "#666";
+            myElement.style.color = "#EEE";
+        } else {
+            div.style.backgroundColor = colorList[myElement.value];
+            myElement.style.backgroundColor = colorList[myElement.value];
+            myElement.style.color = fontColorList[myElement.value];
+        }
+    }
+</script>
+</head>
+<body>
+
+<div class="boardHeader">
+    Mastermind
+</div>
+<div class="boardByLine">
+    A python project by: Preocts
+</div>
+<div class="gameBoard">
+    <div class="boardPiece color1">1</div>
+    <div class="boardPiece color2">2</div>
+    <div class="boardPiece color3">3</div>
+    <div class="boardPiece color4">4</div>
+    <div class="blankBox">0</div>
+    <div class="boardPiece color1">1</div>
+    <div class="boardPiece color2">2</div>
+    <div class="boardPiece color3">3</div>
+    <div class="boardPiece color4">4</div>
+    <div class="blankBox"></div>
+</div>
+<div class="gameBoard">
+    <div class="inputField">
+        <select class="inputBox" name="input1" onchange="colorUpdate(this);">
+            <option value="">-</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+    <div class="inputField">
+        <select class="inputBox" name="input2" onchange="colorUpdate(this);">
+            <option value="">-</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+    <div class="inputField">
+        <select class="inputBox" name="input3" onchange="colorUpdate(this);">
+            <option value="">-</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+    <div class="inputField">
+        <select class="inputBox" name="input4" onchange="colorUpdate(this);">
+            <option value="">-</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+    <div class="blankBox"></div>
+</div>
+<div class="submitButton">Submit my guess</div>
+
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>This is my game</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+    body {
+        background-color: rebeccapurple;
+        color: white;
+        font-family: Source Code Pro, consolas, serif;
+        margin-left: 1%;
+        margin-right: 1%;
+        padding: 0px;
+    }
+
+    div {
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    h1 {
+        font-size: 300%;
+        font-weight: bold;
+        font-variant: small-caps;
+        margin: 0px;
+    }
+
+    h2 {
+        font-size: 200%;
+        font-weight: bold;
+        font-variant: small-caps;
+        margin: 0px;
+    }
+
+    h3 {
+        font-size: 100%;
+        font-weight: normal;
+        font-variant: small-caps;
+        margin: 0px;
+    }
+
+    h4 {
+        font-size: 75%;
+        font-weight: normal;
+        font-variant: small-caps;
+        margin: 0px;
+    }
+
+    .gameBoard {
+        display: grid;
+        grid-template-columns: 90% 10%;
+        grid-column-gap: 0px;
+        grid-row-gap: 5px;
+        overflow: visible;
+    }
+
+    .boardHeader {
+        grid-column: 1 / span 2;
+        text-align: center;
+    }
+
+    .playerPieces {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: saddlebrown;
+        box-shadow:0px 15px 10px rgba(0,0,0,0.15);
+        justify-content: space-evenly;
+    }
+
+    .hintPieces {
+        display: grid;
+        grid-template-columns: auto auto;
+        padding-left: 10px;
+        padding-top: 5px;
+        background-color: saddlebrown;
+        box-shadow:0px 15px 10px rgba(0,0,0,0.15);
+    }
+
+    .guessPieces {
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: saddlebrown;
+        box-shadow:0px 15px 10px rgba(0,0,0,0.15);
+        justify-content: space-evenly;
+    }
+
+    p {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .boardPiece {
+        box-shadow: 5px 5px 15px black;
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+    }
+
+    .hintPiece {
+        box-shadow: 5px 5px 7px black;
+        border-radius: 50%;
+        height: 20px;
+        width: 20px;
+    }
+
+    .inputBoard {
+        grid-column: 1 / span 2;
+        text-align: center;
+        vertical-align: middle;
+        background-color: #CCC;
+    }
+
+    .inputBox {
+        font-size: 200%;
+        background-color: #666;
+        text-align: center;
+        color: #EEE;
+        border-radius: 50%;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    .submitButton {
+        grid-column: 1 / span 2;
+        margin-left: 25%;
+        margin-right: 25%;
+        margin-top: 25px;
+        text-align: center;
+        background-color: silver;
+        color: black;
+        box-shadow:0px 15px 10px rgba(0,0,0,0.15);
+    }
+
+    .submitButton:hover {
+        background-color: silver;
+        color: darkgreen;
+        border: 1px dotted darkgreen;
+    }
+
+    .color0 { background-image: linear-gradient(-45deg, crimson 60%, white); }
+    .color1 { background-image: linear-gradient(-45deg, darkgreen 60%, white); }
+    .color2 { background-image: linear-gradient(-45deg, darkorange 60%, white); }
+    .color3 { background-image: linear-gradient(-45deg, blue 60%, white); }
+    .color4 { background-image: linear-gradient(-45deg, silver 60%, white); }
+    .color5 { background-image: linear-gradient(-45deg, black 60%, white); }
+    .blackpeg { background-image: linear-gradient(-45deg, black 60%, white); }
+    .whitepeg { background-image: linear-gradient(-45deg, silver 60%, white); }
+    .nopeg {
+        background-image: linear-gradient(135deg, #4c260a 10%, #8b5413);
+        border: 1px solid #8b5413;
+        box-shadow: None;
+    }
+</style>
+<script type="text/javascript">
+
+    function addGuess(myElement, sColor) {
+        var choices = document.getElementById("playerGuess").children;
+        var targetColor = "color" + sColor
+        for (var i = 0; i <= choices.length - 1; i++) {
+            if (choices[i].classList.contains("nopeg")) {
+                choices[i].classList.replace("nopeg", targetColor);
+                return;
+            }
+        }
+    }
+
+    function removeGuess(myElement) {
+        myElement.classList = "boardPiece nopeg";
+    }
+
+    function addGameRow() {
+        var choices = document.getElementById("playerGuess").children;
+        for (var i = 0; i <= choices.length - 1; i++) {
+            if (choices[i].classList.contains("nopeg")) {
+                return;
+            }
+        }
+        var pGroup = document.createElement("div");
+        var gGroup = document.createElement("div");
+        pGroup.classList = "playerPieces";
+        gGroup.classList = "hintPieces";
+        for (var i = 0; i <= choices.length - 1; i++) {
+            var newChoice = document.createElement("div");
+            var hintpeg = document.createElement("div");
+            hintpeg.classList = "hintPiece nopeg";
+            newChoice.classList = choices[i].classList;
+            choices[i].classList = "boardPiece nopeg";
+            pGroup.appendChild(newChoice);
+            gGroup.appendChild(hintpeg);
+        }
+        document.getElementById("mainBoard").appendChild(pGroup);
+        document.getElementById("mainBoard").appendChild(gGroup);
+    }
+
+</script>
+</head>
+<body>
+
+<div class="gameBoard" id="mainBoard">
+    <div class="boardHeader">
+        <h1>Mastermind</h1>
+        <h4>A python project by: Preocts</h4>
+    </div>
+    <div class="playerPieces">
+        <div class="boardPiece color0"></div>
+        <div class="boardPiece color1"></div>
+        <div class="boardPiece color2"></div>
+        <div class="boardPiece color3"></div>
+    </div>
+    <div class="hintPieces">
+        <div class="hintPiece whitepeg"></div>
+        <div class="hintPiece whitepeg"></div>
+        <div class="hintPiece nopeg"></div>
+        <div class="hintPiece nopeg"></div>
+    </div>
+    <div class="playerPieces">
+        <div class="boardPiece color4"></div>
+        <div class="boardPiece color5"></div>
+        <div class="boardPiece color0"></div>
+        <div class="boardPiece color1"></div>
+    </div>
+    <div class="hintPieces">
+        <div class="hintPiece blackpeg"></div>
+        <div class="hintPiece blackpeg"></div>
+        <div class="hintPiece whitepeg"></div>
+        <div class="hintPiece whitepeg"></div>
+    </div>
+</div>
+<div class="gameBoard">
+    <div class="boardHeader"><h3>Enter your guess below by clicking to add/remove pieces<h3></div>
+    <div class="playerPieces" id="playerGuess">
+        <div class="boardPiece nopeg" id="playerGuess01" onclick="removeGuess(this);"></div>
+        <div class="boardPiece nopeg" id="playerGuess02" onclick="removeGuess(this);"></div>
+        <div class="boardPiece nopeg" id="playerGuess03" onclick="removeGuess(this);"></div>
+        <div class="boardPiece nopeg" id="playerGuess04" onclick="removeGuess(this);"></div>
+    </div>
+    <div class="hintPieces">
+        <div class="hintPiece nopeg"></div>
+        <div class="hintPiece nopeg"></div>
+        <div class="hintPiece nopeg"></div>
+        <div class="hintPiece nopeg"></div>
+    </div>
+
+    <div class="boardHeader">
+        <div class="guessPieces">
+            <div class="boardPiece color0" onclick="addGuess(this, '0');"></div>
+            <div class="boardPiece color1" onclick="addGuess(this, '1');"></div>
+            <div class="boardPiece color2" onclick="addGuess(this, '2');"></div>
+            <div class="boardPiece color3" onclick="addGuess(this, '3');"></div>
+            <div class="boardPiece color4" onclick="addGuess(this, '4');"></div>
+            <div class="boardPiece color5" onclick="addGuess(this, '5');"></div>
+    </div>
+
+    <div class="submitButton">
+        <h2 onclick="addGameRow();">Submit my guess</h2>
+    </div>
+</div>
+
+</body>
+</html>

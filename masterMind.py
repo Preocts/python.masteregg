@@ -84,7 +84,7 @@ def getGuess() -> list:
     guess = None
     print("{}{: <40}".format(loc(1, 28), ''))
     guess = input(f"{loc(1, 28)}What is your guess? ").split(' ')
-    if guess == "exit":
+    if guess[0] == "exit":
         print(f"{loc(1,29)}")
         print("See ya space cowboy!")
         exit()
@@ -169,6 +169,7 @@ def main():
         if rounds[0] > rounds[1]:
             print(f"{loc(1,29)}")
             print("Better luck next time!")
+            print(f"The code was: {secretCode}")
             exit()
 
 
